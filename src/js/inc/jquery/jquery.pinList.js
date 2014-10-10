@@ -36,7 +36,7 @@ module.exports =  {
         this.options.eventDispatcher.subscribe('init', function() {
             me.uiEmptyList();
             // me.load();
-            var data = require('../mockup/pins.js');
+            var data = require('../../mockup/pins.js');
             me.uiFillList(data);
         });
     },
