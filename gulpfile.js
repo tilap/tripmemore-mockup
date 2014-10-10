@@ -249,7 +249,7 @@ gulp.task('html', ['html:lint'], function() {
         .pipe($.usemin({
             css: ['concat', $.rev()],
             html: [$.htmlmin(config.html.compilation.htmlmin.options)],
-            js: [$.uglify(), $.rev()]
+            js: [$.rev()]
         }))
         // Move to dist folder
         .pipe(gulp.dest(config.paths.html.dist));

@@ -1,7 +1,8 @@
-/* global L, $, document, ejs */
+/* global $, document */
 
 'use strict';
 
+// Front basic stuff -----------------------------------------------------------
 require('./misc/console-fix');
 
 // Avoid touch delay on mobile devices
@@ -9,53 +10,8 @@ require('./misc/console-fix');
 var attachFastClick = require('../../vendor/fastclick/lib/fastclick.js');
 attachFastClick(document.body);
 
-// Leaflet map
 
-// var tileLayer = 'http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png';
-// var tileAttributions = '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
-// var tileLayer = 'http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}';
-// var tileAttributions = 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC';
-// var tileLayer = 'http://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png';
-// var tileAttributions = '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
-var tileLayer = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}';
-var tileAttributions = 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012';
-
-L.Icon.Default.imagePath = '/assets/leaflet';
-
-var map = new L.map('map', {
-    zoomControl:false,
-    center: [48.8587724, 2.346735],
-    zoom: 3,
-    maxBounds : [
-        [90, -100000000],
-        [-90, 100000000]
-    ],
-    attributionControl: false
-});
-
-new L.Control.Zoom({ 
-    position: 'bottomright' 
-}).addTo(map);
-
-new L.control.attribution({
-    position: 'bottomleft',
-    attribution: tileAttributions
-}).addAttribution(tileAttributions).addTo(map);
-
-new L.control.scale({
-    imperial: true,
-    metric: true,
-    position: 'bottomleft'
-}).addTo(map);
-
-new L.tileLayer(tileLayer, {
-    minZoom: 2,
-    maxZoom: 18,
-    reuseTiles: false,
-    unloadInvisibleTiles: false
-}).addTo(map);
-
-// Tooltips
+// Tooltips --------------------------------------------------------------------
 $('*[data-tooltip]').tooltipster({
    animation: 'grow',
    delay: 250,
@@ -64,14 +20,36 @@ $('*[data-tooltip]').tooltipster({
    trigger: 'hover'
 });
 
+// -----------------------------------------------------------------------------
+// Screen
+// -----------------------------------------------------------------------------
 
-var data = require('./mockup/pins');
+/**
+ * Global event dispatcher
+ * Event list :
+    - init: once the screen is loaded
+    - listUpdated: when sidebar list end to update
 
-// Ejs
-var pinTemplate = document.getElementById('template-pin').innerHTML;
+ */
 
-data.forEach(function(pin) {
-    var html = ejs.render(pinTemplate, pin);
-    $('.pins-wrapper').append(html);
-    L.marker([pin.place.ll, pin.place.lg]).addTo(map);
+require('./inc/jquery/jquery.plugin');
+
+$.plugin('pinList', require('./inc/jquery/jquery.pinList'));
+$.plugin('map', require('./inc/jquery/jquery.map'));
+
+// Global event dispatcher
+var eventDispatcher = require('./inc/eventDispatcher');
+eventDispatcher.enableLog();
+
+// Pin list
+$('.pinlist-wrapper').pinList({
+    eventDispatcher : eventDispatcher,
+    itemTemplate: document.getElementById('template-pin').innerHTML
 });
+
+$('#map').map({
+    eventDispatcher : eventDispatcher
+});
+
+// Trigger a init event - @tochange depending on view
+eventDispatcher.trigger('init');

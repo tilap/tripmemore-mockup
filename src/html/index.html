@@ -27,11 +27,9 @@
 
 @@include('./includes/navbar.html')
 
-<div class="sidebar-wrapper">
-    <div class="title">
-    </div>
-    <div class="pins-wrapper">
-    </div>
+<div class="pinlist-wrapper">
+    <div class="title" data-pinlist-title></div>
+    <div class="pins-wrapper" data-pinlist-list></div>
 </div>
 
 <!-- map wrapper so we can add other stuff over the map later -->
@@ -41,7 +39,7 @@
 
 <!-- ejs template -->
 <script id="template-pin" type="text/template">
-    <div class="pin" data-id="<%- id %>" >
+    <div class="pin" data-id="<%- _id %>" >
         <% if(media.type==='image') { %>
             <img src="<%- media.content %>" class="thumbnail" />
         <% } %>
