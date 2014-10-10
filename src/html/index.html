@@ -3,29 +3,67 @@
 <head>
 
 @@include('./includes/htmlhead.html', {
-    "applicationName" : "Gulppage",
-    "copyrightYear" : "September 2014",
+    "applicationName" : "TripMeMore app",
+    "copyrightYear" : "octobre 2014",
     "twitterUsername" : "@jlavinh",
     "authorName" : "Julien Tilap LA VINH",
     "authorProfileUrl" : "https://plus.google.com/u/0/100500349692608932832/posts",
-    "description" : "Gulp stack to build static page easily"
+    "description" : "Draft design for TripMeMore "
 })
 
     <!-- fonticon sample -->
     <link rel="stylesheet" href="fonts/fontello/css/gulppage.css" type='text/css' media='all' />
 
     <!-- google font for the demo -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:100,400,900|Permanent+Marker|Open+Sans:300,400,600|Short+Stack:400' rel='stylesheet' type='text/css'>
 
     <!-- build:css stylesheet/style.css -->
+    <link rel="stylesheet" href="../../vendor/tooltipster/css/tooltipster.css" />
+    <link rel="stylesheet" href="../../vendor/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="../../tmp/stylesheet/stylesheet.css" />
     <!-- endbuild -->
 </head>
 <body>
 
+@@include('./includes/navbar.html')
+
+<div class="sidebar-wrapper">
+    <div class="title">
+    </div>
+    <div class="pins-wrapper">
+    </div>
+</div>
+
+<!-- map wrapper so we can add other stuff over the map later -->
+<div class="map-wrapper"> 
+    <div id="map"></div>
+</div>
+
+<!-- ejs template -->
+<script id="template-pin" type="text/template">
+    <div class="pin" data-id="<%- id %>" >
+        <% if(media.type==='image') { %>
+            <img src="<%- media.content %>" class="thumbnail" />
+        <% } %>
+        <div class="title"><%= place.name %></div>
+        
+        <div class="infos">
+            Pined on <%= date %><br />
+            <a href="<%- origin %>"><%= origin %></a>
+        </div>
+        <div class="links">
+            <a href="#" class="btn btn-default btn-primary btn-sm"><i class="icon-eye"></i></a>
+            <a href="#" class="btn btn-default btn-sm"><i class="icon-location"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</script>
 
 <!-- build:js js/bundle.js -->
 <script src="../../vendor/jquery/dist/jquery.js"></script>
+<script src="../../vendor/leaflet/dist/leaflet.js"></script>
+<script src="../../vendor/tooltipster/js/jquery.tooltipster.js"></script>
+<script src="../../vendor/ejs/ejs.js"></script>
 <script src="../../tmp/js/app.js"></script>
 <!-- endbuild -->
 

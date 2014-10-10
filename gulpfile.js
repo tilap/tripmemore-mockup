@@ -93,6 +93,7 @@ gulp.task('livereload', ['livereload:server'], function() {
 
 // Linter for less
 gulp.task('less:lint', function(){
+    /*
     return gulp.src(config.paths.less.src + '/*.less')
         .pipe(
             $.recess(config.style.linter.options)
@@ -102,6 +103,7 @@ gulp.task('less:lint', function(){
                 this.emit('end');
             })
         );
+    */
 });
 
 // Compilation
@@ -272,9 +274,16 @@ gulp.task('html:clean', function(){
 // =============================================================================
 
 // Optimize assets
-gulp.task('assets', function() {
-    return gulp.src(config.paths.assets.src + '/**/*')
+gulp.task('assets', ['assets:images', 'assets:static']);
+
+gulp.task('assets:images', function() {
+    return gulp.src([config.paths.assets.src + '/**/*.jpg', config.paths.assets.src + '/**/*.png'])
         .pipe($.imagemin(config.assets.images.compression))
+        .pipe(gulp.dest(config.paths.assets.dist));
+});
+
+gulp.task('assets:static', function() {
+    return gulp.src([config.paths.assets.src + '/**/*.json', config.paths.assets.src + '/**/*.xml'])
         .pipe(gulp.dest(config.paths.assets.dist));
 });
 

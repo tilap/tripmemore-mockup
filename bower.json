@@ -2,6 +2,11 @@
   "name": "gulppage",
   "version": "0.2.0",
   "dependencies": {
-    "bootstrap": "3.2.x"
+    "bootstrap" : "3.2.x",
+    "jquery" : "2.1.x",
+    "leaflet": "0.7.x",
+    "tooltipster" : "3.2.x",
+    "ejs" : "1.0.x",
+    "fastclick": "1.0.x"
   }
 }
