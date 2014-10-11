@@ -29,6 +29,12 @@
     }
 }
 
+// Leaflet markercluster plugin
+@import (inline) 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+
+// Magnific popup
+@import (inline) 'magnific-popup/dist/magnific-popup.css';
+
 // Local mixins
 @import (reference) 'lib/fonts.less';
 
@@ -135,24 +141,82 @@ a{
     clear:both;
     padding:@padding-vertical @padding-horizontal;
     border-bottom:1px solid darken(@sidebar-bg, 5%);
+    .transition(background-color .2s);
     img {
         width: @thumb-width;
         float: left;
         margin-right: @thumb-margin;
+        cursor:pointer;
     }
     .title, .infos {
         margin-left: @thumb-width + @thumb-margin;
     }
     .title{
         font-size: 1.2em;
+        .font(serif, strong);
+        cursor:pointer;
     }
     .infos{
         color: @gray;
         font-size:.8em;
+        margin-bottom:40px; // To make sure buttons don't override description
     }
     .links{
         position:absolute;
         bottom:@padding-vertical;
         right:@padding-horizontal;
+    }
+    &:hover{
+        background:lighten(@sidebar-bg, 5%);
+    };
+}
+
+
+.tripmemore-modal {
+    @content-padding-horizontal : 15px;
+    @content-padding-vertical : 15px;
+    @left-width:300px;
+    @width:1200px;
+
+    position: relative;
+    
+    width: auto;
+    min-width: 300px;
+    max-width: @width;
+    margin: 20px auto;
+    padding:@content-padding-vertical 0;
+
+    .mfp-close {
+        color:#fff;
+    }
+    .inside{
+        margin:0 @content-padding-horizontal;
+        .left{
+            background:#fff;
+            float:left;
+            margin-right: @content-padding-horizontal;
+            width:@left-width + 2 * @content-padding-horizontal;
+            padding: @content-padding-vertical @content-padding-horizontal;
+            .title{
+                .font(serif, strong);
+                font-size:1.4em;
+            }
+            .map{
+                height:@left-width;
+                width:@left-width;
+                background: @color-blue-sea;
+                margin: @content-padding-vertical 0;
+            }
+        }
+        .right {
+            text-align:center;
+            margin-left:@left-width;
+            img{
+                width:auto;
+                max-width:90%;
+                max-height:100%;
+                border:10px solid #fff;
+            }
+        }
     }
 }

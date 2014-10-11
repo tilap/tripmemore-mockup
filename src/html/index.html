@@ -41,17 +41,34 @@
 <script id="template-pin" type="text/template">
     <div class="pin" data-id="<%- _id %>" >
         <% if(media.type==='image') { %>
-            <img src="<%- media.content %>" class="thumbnail" />
+            <img src="<%- media.content %>" data-open-place="<%- _id %>" />
         <% } %>
-        <div class="title"><%= place.name %></div>
+        <div class="title" data-open-place="<%- _id %>"><%= place.name %></div>
         
         <div class="infos">
             Pined on <%= date %><br />
             <a href="<%- origin %>"><%= origin %></a>
         </div>
         <div class="links">
-            <a href="#" class="btn btn-default btn-primary btn-sm"><i class="icon-eye"></i></a>
-            <a href="#" class="btn btn-default btn-sm"><i class="icon-location"></i></a>
+            <a href="#" class="btn btn-default btn-primary btn-sm" data-open-place="<%- _id %>"><i class="icon-eye"></i></a>
+            <a href="#" class="btn btn-default btn-sm" data-focus-place="<%- _id %>"><i class="icon-location"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</script>
+
+<script id="template-pin-item" type="text/template">
+    <div class="image" data-id="<%- _id %>" >
+        <div class="left">
+            <div class="title"><%= place.name %></div>
+            <div class="map" id="map-details" data-ll="<%- place.ll %>" data-lg="<%- place.lg %>"></div>
+            <div class="infos">
+                Pined on <%= date %><br />
+                Source: <a href="<%- origin %>"><%= origin %></a>
+            </div>
+        </div>
+        <div class="right">
+            <img src="<%- media.content %>" />
         </div>
         <div class="clearfix"></div>
     </div>
@@ -59,9 +76,16 @@
 
 <!-- build:js js/bundle.js -->
 <script src="../../vendor/jquery/dist/jquery.js"></script>
+
 <script src="../../vendor/leaflet/dist/leaflet.js"></script>
+<script src="../../vendor/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+
 <script src="../../vendor/tooltipster/js/jquery.tooltipster.js"></script>
+
 <script src="../../vendor/ejs/ejs.js"></script>
+
+<script src="../../vendor/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+
 <script src="../../tmp/js/app.js"></script>
 <!-- endbuild -->
 
