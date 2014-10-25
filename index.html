@@ -1,0 +1,35 @@
+<!DOCTYPE HTML> <html> <head> <meta http-equiv="content-type" content="text/html; charset=utf-8"> <meta charset="UTF-8"> <link rel="profile" href="http://gmpg.org/xfn/11"> <!-- Prevent overscroll on the body --> <preference name="DisallowOverscroll" value="true"> <!-- android --> <meta name="mobile-web-app-capable" content="yes"> <!-- iOS --> <meta name="apple-mobile-web-app-capable" content="yes"> <meta name="apple-mobile-web-app-status-bar-style" content="translucent-black"> <meta name="apple-mobile-web-app-title" content="TripMeMore app"> <!-- IE cleartype --> <meta http-equiv="cleartype" content="on"> <title>TripMeMore app</title> <meta name="description" content="Draft design for TripMeMore "> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta name="copyright" content="octobre 2014"> <meta name="twitter:card" content="summary"> <meta name="twitter:site" content="@jlavinh"> <meta name="author" content="Julien Tilap LA VINH"> <link rel="author" href="https://plus.google.com/u/0/100500349692608932832/posts"> <!--[if IE]>
+    <meta http-equiv="imagetoolbar" content="no">
+    <![endif]--> <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]--> <!-- fonticon sample --> <link rel="stylesheet" href="fonts/fontello/css/gulppage.css" type="text/css" media="all"> <!-- google font for the demo --> <link href="http://fonts.googleapis.com/css?family=Raleway:100,400,900|Permanent+Marker|Open+Sans:300,400,600|Short+Stack:400" rel="stylesheet" type="text/css"> <link rel="stylesheet" href="stylesheet/style-32974084.css"> </preference></head> <body> <nav class="navbar navbar-default navbar-fixed-top" role="navigation"> <div class="container-fluid"> <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">TripMeMore</a> </div> <div class="collapse navbar-collapse" id="navbar-collapse"> <ul class="nav navbar-nav"> <li> <div class="btn-group btn-group-sm"> <a href="#" class="btn btn-default" title="Switch to gallery view (coming soon)" data-tooltip><i class="icon-camera"></i></a> <a href="#" class="btn btn-default active" title="Currently in map view mode" data-tooltip><i class="icon-list"></i></a> </div> </li> <li><a href="#">La carte de Jean-Marie Sebastien</a></li> </ul> <div class="navbar-right navbar-user"> <!--
+                <a href="#" class="btn btn-primary navbar-btn">Login</a>
+                --> <a href="#" class="btn btn-user navbar-btn btn-sm">Login</a> </div> <form class="navbar-form navbar-right" role="search"> <div class="form-group"> <div class="input-group input-group-sm"> <input type="text" class="form-control" placeholder="Search..."> <span class="input-group-btn"> <button class="btn btn-default" type="button"><i class="icon-search"></i></button> </span> </div> </div> </form> </div> </div> </nav> <div class="pinlist-wrapper"> <div class="title" data-pinlist-title></div> <div class="pins-wrapper" data-pinlist-list></div> </div> <!-- map wrapper so we can add other stuff over the map later --> <div class="map-wrapper"> <div id="map"></div> </div> <!-- ejs template --> <script id="template-pin" type="text/template"><div class="pin" data-id="<%- _id %>" >
+        <% if(media.type==='image') { %>
+            <img src="<%- media.content %>" data-open-place="<%- _id %>" />
+        <% } %>
+        <div class="title" data-open-place="<%- _id %>"><%= place.name %></div>
+        
+        <div class="infos">
+            Pined on <%= date %><br />
+            <a href="<%- origin %>"><%= origin %></a>
+        </div>
+        <div class="links">
+            <a href="#" class="btn btn-default btn-primary btn-sm" data-open-place="<%- _id %>"><i class="icon-eye"></i></a>
+            <a href="#" class="btn btn-default btn-sm" data-focus-place="<%- _id %>"><i class="icon-location"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div></script> <script id="template-pin-item" type="text/template"><div class="image" data-id="<%- _id %>" >
+        <div class="left">
+            <div class="title"><%= place.name %></div>
+            <div class="map" id="map-details" data-ll="<%- place.ll %>" data-lg="<%- place.lg %>"></div>
+            <div class="infos">
+                Pined on <%= date %><br />
+                Source: <a href="<%- origin %>"><%= origin %></a>
+            </div>
+        </div>
+        <div class="right">
+            <img src="<%- media.content %>" />
+        </div>
+        <div class="clearfix"></div>
+    </div></script> <script src="js/bundle-a1ff306d.js"></script> </body> </html>
