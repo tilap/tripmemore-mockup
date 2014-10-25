@@ -2,7 +2,9 @@
 
 Web frontend mockup for the TripMeMore project during [Welean 3rd session](http://welean.it).
 
-A screen to display a map and a pin list, with details.
+A single screen to display a pin list and locations on a map, with details in a popup.
+
+See the result on the [demo page](http://tilap.github.io/tripmemore-mockup/).
 
 ## Install
 
