@@ -15,6 +15,8 @@ make install
 make watch
 ```
 
+You can the view the page on [http://localhost:4000](http://localhost:4000) (or any other port you've set up in the config file).
+
 ## Developper note
 
 This mockup is built over [Gulppage](https://github.com/tilap/gulppage) simple dev front-end framework.
